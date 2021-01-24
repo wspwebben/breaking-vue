@@ -5,8 +5,8 @@ export default {
   name: 'ModuleStructure',
   components: {
     LayoutHeader,
-  }
-}
+  },
+};
 </script>
 
 <template>

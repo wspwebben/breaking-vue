@@ -1,7 +1,13 @@
-<script setup>
+<script>
 import LayoutLogo from './Logo.vue';
 import LayoutNavigation from './Navigation.vue';
 
+export default {
+  components: {
+    LayoutLogo,
+    LayoutNavigation,
+  },
+};
 </script>
 
 <template>
