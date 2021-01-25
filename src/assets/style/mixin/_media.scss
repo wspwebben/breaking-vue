@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use '../variables';
+
+@mixin media($screen, $direction: 'from') {
+  @if ($direction != 'from' and $direction != 'to') {
+    @error 'Direction is wrong';
+  }
+ 
+  $screen-size: $screen;
+
+  @if (meta.type-of($screen) == string) {
+    @if (map.has-key(variables.$screens, $screen)) {
+      $screen-size: map.get(variables.$screens, $screen)
+    } @else {
+      @error 'Screen is wrong';
+    }
+  }
+
+  @if ($direction == 'from') {
+    @media (min-width: $screen-size) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $screen-size - 1) {
+      @content;
+    }
+  }
+}
