@@ -1,26 +1,32 @@
 <script>
-import { ref } from 'vue'; 
+import { ref, computed } from 'vue'; 
 
-import BaseGrid from '/@/Base/components/Grid.vue';
-import EpisodeCard from '/@/Episode/components/Card.vue';
+import EpisodeSeriesList from '/@/Episode/components/SeriesList.vue';
 
 import { getAllEpisodes } from '/@/Episode/api';
+
+import { groupBy } from '/@/helpers';
+
+const makeSeriesTitle = ({ season, series}) => `${series} season ${season}`;
 
 export default {
   name: 'ViewEpisodeList',
   components: {
-    BaseGrid,
-    EpisodeCard,
+    EpisodeSeriesList,
   },
   setup() {
     const episodes = ref([]);
+
+    const episodesBySeries = computed(() => {
+      return groupBy(episodes.value, makeSeriesTitle)
+    });
 
     getAllEpisodes().then(list => {
       episodes.value = list;
     });
 
     return {
-      episodes
+      episodesBySeries,
     }
   }
 }
@@ -28,15 +34,12 @@ export default {
 
 <template>
   <div class="ViewEpisodeList container">
-    <BaseGrid :items="episodes">
-      <template #default="{ item: episode }">
-        <EpisodeCard
-          :id="episode.id"
-          :title="episode.title"
-          :characters="episode.characters"
-        />
-      </template>
-    </BaseGrid>
+    <EpisodeSeriesList
+      v-for="(episodes, title) in episodesBySeries"
+      :key="title"
+      :title="title"
+      :episodes="episodes"
+    />
   </div>
 </template>
 

@@ -14,7 +14,8 @@ export const transform = (episode) => {
     date,
     characters,
     title,
-    season,
+    // TODO: report api
+    season: season.trim(),
     series,
     order,
   }
