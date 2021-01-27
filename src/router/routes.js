@@ -1,7 +1,9 @@
-import Home from '/@/Layout/views/Main.vue';
-import About from '/@/Layout/views/About.vue';
+import { wrapMainLayout } from '/@/Layout/routes';
+
+import { routes as episodeRoutes } from '/@/Episode/routes';
 
 export const routes = [
-  { path: '/', component: Home },
-  { path: '/about', component: About },
-]
+  wrapMainLayout(
+    episodeRoutes,
+  )
+];
