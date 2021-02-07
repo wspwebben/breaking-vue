@@ -29,6 +29,7 @@ export default {
         :id="episode.id"
         :title="episode.title"
         :characters="episode.characters"
+        :date="episode.date"
       />
     </template>
   </BaseGrid>

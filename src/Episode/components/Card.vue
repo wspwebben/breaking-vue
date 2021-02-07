@@ -1,6 +1,8 @@
 <script>
 import BaseCard from '/@/Base/components/Card.vue';
 
+import { formatDateString } from '/@/service/date';
+
 export default {
   name: 'EpisodeCard',
   components: {
@@ -18,6 +20,15 @@ export default {
       type: Array,
       default: () => [],
     },
+    date: {
+      type: String,
+      default: '',
+    }
+  },
+  computed: {
+    formatedDate() {
+      return formatDateString(this.date, 'MM-dd-yyyy');
+    }
   }
 }
 </script>
@@ -29,13 +40,23 @@ export default {
     <ul class="EpisodeCard__character-list">
       <li class="EpisodeCard__character" v-for="character in characters" :key="character">{{ character }}</li>
     </ul>
+
+    <p class="EpisodeCard__date">
+      Air date: <time>{{ formatedDate }}</time>
+    </p>
   </BaseCard>
 </template>
 
 <style lang="scss">
-.EpisodeCard {
+@use '../../assets/style/colors';
 
-  &__character-list {
+.EpisodeCard {
+  position: relative;
+
+  &__date {
+    display: block;
+    margin: 0;
+    text-align: left;
   }
 }
 </style>
