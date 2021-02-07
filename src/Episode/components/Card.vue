@@ -35,7 +35,11 @@ export default {
 
 <template>
   <BaseCard class="EpisodeCard">
-    <h3 class="EpisodeCard__title">{{ title }}</h3>
+    <h3 class="EpisodeCard__title">
+      <RouterLink class="EpisodeCard__title-link" :to="`/${id}`">
+        {{ title }}
+      </RouterLink>
+    </h3>
 
     <ul class="EpisodeCard__character-list">
       <li class="EpisodeCard__character" v-for="character in characters" :key="character">{{ character }}</li>
@@ -52,6 +56,22 @@ export default {
 
 .EpisodeCard {
   position: relative;
+
+  &__title-link {
+
+    &:hover {
+      color: colors.$primary;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }  
+  }
 
   &__date {
     display: block;
