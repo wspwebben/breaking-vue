@@ -49,7 +49,7 @@ export const getUnknownCharacter = (name) => {
     name,
     nickname: '',
     status: UNKNOWN,
-    photo: 'default',
+    photo: 'unknown-character.jpg',
     occupation: [],
     portrayed: '',
   }
