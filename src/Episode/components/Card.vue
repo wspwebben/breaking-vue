@@ -1,7 +1,10 @@
 <script>
 import BaseCard from '/@/Base/components/Card.vue';
 
+import { EPISODE } from '/@/Episode/routes';
+
 import { formatDateString } from '/@/service/date';
+
 
 export default {
   name: 'EpisodeCard',
@@ -28,6 +31,14 @@ export default {
   computed: {
     formatedDate() {
       return formatDateString(this.date, 'MM-dd-yyyy');
+    },
+    toEpisodePage() {
+      return {
+        name: EPISODE,
+        params: {
+          id: this.id,
+        }
+      }
     }
   }
 }
@@ -36,7 +47,7 @@ export default {
 <template>
   <BaseCard class="EpisodeCard">
     <h3 class="EpisodeCard__title">
-      <RouterLink class="EpisodeCard__title-link" :to="`/${id}`">
+      <RouterLink class="EpisodeCard__title-link" :to="toEpisodePage">
         {{ title }}
       </RouterLink>
     </h3>
